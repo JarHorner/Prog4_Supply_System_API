@@ -7,7 +7,13 @@ module.exports.register = (app, database) => {
 
   //retrieves all the items in the database.
   app.get("/api/items", async (req, res) => {
-    res.status(200).send("The API will retrieve all the items from the database!").end();
+    let query;
+    query = database.query("SELECT * FROM Items");
+
+    console.log(query);
+    const items = await query;
+
+    res.status(200).send(JSON.stringify(items)).end();
   });
 
   //retrieves a specific item with an id
@@ -17,7 +23,42 @@ module.exports.register = (app, database) => {
 
   //Adds a new item to the Item table in the database
   app.post("/api/items", async (req, res) => {
-    res.status(200).send("The API will add a new item to the database!").end();
+    let _name = req.body.name;
+    let _stockQuantity = req.body.stockQuantity;
+    let _price = req.body.price;
+    let _supplierId = req.body.supplierId;
+    let _status = "";
+
+    if (
+      typeof _name === "undefined" ||
+      typeof _stockQuantity === "undefined" ||
+      typeof _price === "undefined" ||
+      typeof _supplierId === "undefined"
+    ) {
+      _status = "Unsuccess";
+    } else {
+      const query = database.query(
+        "insert into Items(name, stockQuantity, price, supplierId) values (?, ?, ?, ?)",
+        [_name, _stockQuantity, _price, _supplierId]
+      );
+      const items = await query;
+      _status = "Success";
+    }
+
+    let messsage =
+      '{"status":"' +
+      _status +
+      '", "data":{"_name":"' +
+      _name +
+      '","_stockQuantity":"' +
+      _stockQuantity +
+      '","_price":"' +
+      _price +
+      '", "_supplierId":"' +
+      _supplierId +
+      '"}}';
+    const obj_messsage = JSON.parse(messsage);
+    res.status(200).send(obj_messsage).end();
   });
 
   // will be able to change the quantity in the database
