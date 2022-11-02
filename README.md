@@ -4,6 +4,8 @@ COMP3504_Assign2 is nodejs API for basic functionallity recieving, editing and d
 
 ## Installation
 
+Before everything, make sure the database you are using is up and running. The API will not function otherwise.
+
 - Open terminal in vscode and make sure you are in the react file path
 > .........../ ...../COMP3504_Assign2
 
