@@ -41,7 +41,7 @@ Creates an item from the database by posting a JSON body containing the name, st
 
 <br><br> `PATCH      /api/items/:id` <br><br>
 
-Retrieves a certain item from the database by its id, and changes the stockQuantity by the amount given in the given JSON body.
+Retrieves a certain item from the database by its id, and changes the stockQuantity by the amount in the given JSON body.
 
 <br><br> `DELETE      /api/items/:id` <br><br>
 
