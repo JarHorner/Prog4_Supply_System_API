@@ -5,8 +5,14 @@ module.exports.register = (app, database) => {
       res.status(200).send("The API is connected properly! ").end();
     } catch (error) {
       res
-        .status(error?.status || 500)
-        .send({ status: "FAILED", data: { error: error?.message || error } });
+        .status(error?.status)
+        .send({ 
+          tried: 'Base call', 
+          status: `FAILED`, 
+          error: error?.message || error,
+          message: 'Not properly connected to the API' ,
+          detail: 'Ensure you are correctly connected to the API'
+        });
     }
   });
 
@@ -22,8 +28,14 @@ module.exports.register = (app, database) => {
       res.status(200).send(JSON.stringify(items)).end();
     } catch (error) {
       res
-        .status(error?.status || 500)
-        .send({ status: "FAILED", data: { error: error?.message || error } });
+        .status(error?.status)
+        .send({ 
+          tried: 'Retrieving all items', 
+          status: `FAILED`, 
+          error: error?.message || error,
+          message: 'Not properly connected to the API' ,
+          detail: 'Ensure you are correctly connected to the API'
+        });
     }
   });
 
@@ -60,9 +72,27 @@ module.exports.register = (app, database) => {
         );
         _status = "Success";
       } catch (error) {
-        res
-          .status(error?.status || 500)
-          .send({ status: "FAILED", data: { error: error?.message || error } });
+        if (error?.status === 400) {
+          res
+          .status(error?.status)
+          .send({ 
+            tried: 'Adding a new item', 
+            status: `FAILED`, 
+            error: error?.message || error,
+            message: 'Information in the body is either mis-formatted or incorrect' ,
+            detail: 'Ensure you are including the correct information in the body, and in the right order'
+          });
+        } else if (error?.status === 500) {
+          res
+          .status(error?.status)
+          .send({ 
+            tried: 'Adding a new item', 
+            status: `FAILED`, 
+            error: error?.message || error,
+            message: 'Not properly connected to the API' ,
+            detail: 'Ensure you are correctly connected to the API'
+          });
+        }
       }
 
       let messsage =
@@ -83,7 +113,7 @@ module.exports.register = (app, database) => {
   });
 
   // will be able to change the quantity in the database
-  app.patch("/api/items/:itemId", async (req, res) => {
+  app.patch("/api/items/:id", async (req, res) => {
     res
       .status(200)
       .send(
@@ -93,7 +123,7 @@ module.exports.register = (app, database) => {
   });
 
   // will be able to delete an item in the database
-  app.delete("/api/items/:itemId", async (req, res) => {
+  app.delete("/api/items/:id", async (req, res) => {
     res
       .status(200)
       .send("The API will delete an item in the database by the id!")
