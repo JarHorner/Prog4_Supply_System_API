@@ -114,6 +114,19 @@ module.exports.register = (app, database) => {
 
   // will be able to change the quantity in the database
   app.patch("/api/items/:id", async (req, res) => {
+
+    let success  
+    let itemID = req.body.id;
+    let newQuantity = req.body.quantity;
+
+    if (NaN(itemID) || NaN(newQuantity)) {
+      success = false;
+    } else {
+      try {
+        database.query('UPDATE items SET item_quantity = ? WHERE item_id = ?'),[newQuantity, itemID] 
+      } catch (error) {
+      }
+    }
     res
       .status(200)
       .send(
