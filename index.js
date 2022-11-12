@@ -8,6 +8,9 @@ app.use((req, res, next) => {
     next();  
 });
 
+res = database.query("SELECT * FROM items WHERE ID = 3000")
+console.log(res);
+
 const startServer = async _ => {
     const database = require("./src/database");
     let db = await database.setup();
