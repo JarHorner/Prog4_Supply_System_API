@@ -15,5 +15,3 @@ dist
 npm-debug.log
 
 coverage
-
-.env
