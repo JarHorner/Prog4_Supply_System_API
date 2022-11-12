@@ -115,17 +115,42 @@ module.exports.register = (app, database) => {
   // will be able to change the quantity in the database
   app.patch("/api/items/:id", async (req, res) => {
 
-    let success  
+    let success = false
     let itemID = req.body.id;
     let newQuantity = req.body.quantity;
 
     if (NaN(itemID) || NaN(newQuantity)) {
-      success = false;
+      res.status(400)
+             .send({
+              tried: "Updating Item Quantity",
+              success: success,
+              error: error,
+              messsage: "Could not process request. Please check if the information provided is correct"
+             })
     } else {
       try {
         database.query('UPDATE items SET item_quantity = ? WHERE item_id = ?'),[newQuantity, itemID] 
       } catch (error) {
+        switch(error.status) {
+          case 404:
+            res.status(404)
+            .send({
+             tried: "Updating Item Quantity",
+             success: success,
+             error: error,
+             messsage: "Item not found. Please add the Item first"
+            })
+          case 500:
+            res.status(500)
+            .send({
+             tried: "Updating Item Quantity",
+             success: success,
+             error: error,
+             messsage: "Unable to connect to API. Please ensure the server is running"
+            })
+        }
       }
+      res.status(200).send({success:success}).end()
     }
     res
       .status(200)
