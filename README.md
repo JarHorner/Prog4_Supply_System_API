@@ -51,7 +51,7 @@ Here are all the calls you can make using this API:
     > **REQUEST BODY:** JSON Object with required attributes: 
 
     ATTRIBUTE | DESCRIPTION
-    
+    --------- | -----------
     name | String: a line of text for the item name 
     
     stockQuantity | INT: a number describing the stock count of the item 
