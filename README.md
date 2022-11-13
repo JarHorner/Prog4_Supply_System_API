@@ -48,15 +48,16 @@ Here are all the calls you can make using this API:
 
 - ` /api/items`\
     Add a new item to the database
-    > **REQUEST BODY:** JSON Object with required attributes: 
+    
 
     ATTRIBUTE | DESCRIPTION
     --------- | -----------
     name | String: a line of text for the item name 
     stockQuantity | INT: a number describing the stock count of the item 
     price | DOUBLE: a number describing the price of the item 
-    supplierId | INT: a number for the Id of the supplier 
-    
+    supplierId | INT: a number for the Id of the supplier
+     
+    > **REQUEST BODY:** JSON Object with required attributes: 
     Example of a sample JSON body request:
     ``````
     {
@@ -67,7 +68,7 @@ Here are all the calls you can make using this API:
     }
     ``````
     > **RESPONSE:**  JSON Object
-    
+
     Example of sucess response:
     `````````
     {
