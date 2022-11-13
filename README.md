@@ -56,8 +56,9 @@ Here are all the calls you can make using this API:
     stockQuantity | INT: a number describing the stock count of the item 
     price | DOUBLE: a number describing the price of the item 
     supplierId | INT: a number for the Id of the supplier
-     
-    > **REQUEST BODY:** JSON Object with required attributes: 
+
+    > **REQUEST BODY:** JSON Object with required attributes:
+
     Example of a sample JSON body request:
     ``````
     {
@@ -84,9 +85,41 @@ Here are all the calls you can make using this API:
 
 <br />
 
-<br><br> `POST      /api/items` <br><br>
+### PATCH
 
-Creates an item from the database by posting a JSON body containing the name, stockQuantity, price and supplierId.
+- ` /api/items/:id`\
+    Change an attribute of an item using it's Id in the database, like stockQuantity for example
+    
+
+    ATTRIBUTE | DESCRIPTION
+    --------- | -----------
+    Name Of Attribute | New value for that attribute
+    
+
+    > **REQUEST BODY:** JSON Object with new attributes:
+     
+    Example of a sample JSON body request:
+    ``````
+    {
+        "stockQuantity" : 10
+    }
+    ``````
+    > **RESPONSE:**  JSON Object
+
+    Example of sucess response:
+    `````````
+    {
+        "status": "Success",
+        "data": {
+            "_stockQuantity": "10",
+        }
+    }
+    `````````
+
+<br />
+
+
+
 
 <br><br> `PATCH      /api/items/:id` <br><br>
 
