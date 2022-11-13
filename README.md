@@ -118,13 +118,10 @@ Here are all the calls you can make using this API:
 
 <br />
 
+## DELETE
+
+- ` /api/items/:id` \
+    Deletes the item from the database using the item id
+    > **RESPONSE:**  JSON Object
 
 
-
-<br><br> `PATCH      /api/items/:id` <br><br>
-
-Retrieves a certain item from the database by its id, and changes the stockQuantity by the amount in the given JSON body.
-
-<br><br> `DELETE      /api/items/:id` <br><br>
-
-Removes an item from the database by its id.
