@@ -28,13 +28,17 @@ Here are all the calls you can make using this API:
 # GET
 
 - ` / `
-    > Running just the API link will return the status if the API is functional/connected properly  
+    Gets default API call: Displays status of API
+    > **RESPONSE:**  API staus response  <br><br>
+
 
 - ` /api/items`
-    > This will return all items present in the database as a JSON Object
+    Gets items currently present in database
+    > **RESPONSE:**  JSON Object
 
     - ` /api/items/:id`
-    > Adding the item id to the url will get the requested item as a JSON Object 
+    Gets items currently present in database by item ID number
+    > > **RESPONSE:**  JSON Object   <br><br>
 
 
 # POST
