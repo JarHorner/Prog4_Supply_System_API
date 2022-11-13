@@ -25,17 +25,19 @@ if not, make sure to check if the database is running or the .env file has the p
 
 Here are all the calls you can make using this API:
 
-<br> `GET     /` <br><br>
+# GET
 
-Confirms a connection is made with the API.
+- ` / `
+> Running just the API link will return the status if the API is functional/connected properly  
 
-<br><br> `GET      /api/items` <br><br>
+- ` /api/items`
+> This will return all items present in the database as a JSON Object
 
-Retrieves all the items in the database.
+    - ` /api/items/:id`
+    > Adding the item id to the url will get the requested item as a JSON Object 
 
-<br><br> `GET      /api/items/:id` <br><br>
 
-Retrieves a certain item from the database by its id.
+# POST
 
 <br><br> `POST      /api/items` <br><br>
 
