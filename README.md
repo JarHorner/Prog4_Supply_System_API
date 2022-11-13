@@ -49,12 +49,14 @@ Here are all the calls you can make using this API:
 - ` /api/items`\
     Add a new item to the database
     > **REQUEST BODY:** JSON Object with required attributes: 
-    `{
-    "name" : "test",
-    "stockQuantity" : 8,
-    "price" : 9.80,
-    "supplierId" : 5010
-    }`
+    ``````
+    {
+        "name" : "test",
+        "stockQuantity" : 8,
+        "price" : 9.80,
+        "supplierId" : 5010
+    }
+    ``````
     > **RESPONSE:**  JSON Object
 
 <br />
