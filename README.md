@@ -25,7 +25,7 @@ if not, make sure to check if the database is running or the .env file has the p
 
 Here are all the calls you can make using this API:
 
-# GET
+### GET
 
 - ` / `\
     Gets default API call: Displays status of API
@@ -44,7 +44,20 @@ Here are all the calls you can make using this API:
     > **RESPONSE:**  JSON Object
 
 
-# POST
+### POST
+
+- ` /api/items`\
+    Add a new item to the database
+    > **REQUEST BODY:** JSON Object with required attributes: 
+    `{
+    "name" : "test",
+    "stockQuantity" : 8,
+    "price" : 9.80,
+    "supplierId" : 5010
+    }`
+    > **RESPONSE:**  JSON Object
+
+<br />
 
 <br><br> `POST      /api/items` <br><br>
 
