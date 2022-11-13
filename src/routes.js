@@ -20,7 +20,7 @@ module.exports.register = (app, database) => {
   app.get("/api/items", async (req, res) => {
     let query;
     try {
-      query = database.query("SELECT * FROM Items");
+      query = database.query("SELECT * FROM items");
 
       console.log(query);
       const items = await query;

@@ -118,7 +118,7 @@ Here are all the calls you can make using this API:
 
 <br />
 
-## DELETE
+### DELETE
 
 - ` /api/items/:id` \
     Deletes the item from the database using the item id
