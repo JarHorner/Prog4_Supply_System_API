@@ -50,6 +50,8 @@ Here are all the calls you can make using this API:
     Add a new item to the database
     > **REQUEST BODY:** JSON Object with required attributes: 
 
+    ATTRIBUTE | DESCRIPTION
+    --- | ---
     name | String: a line of text for the item name 
     --- | ---
     stockQuantity | INT: a number describing the stock count of the item 
@@ -58,7 +60,7 @@ Here are all the calls you can make using this API:
     --- | ---
     supplierId | INT: a number for the Id of the supplier 
     --- | ---
-    
+
     ``````
     {
         "name" : "test",
