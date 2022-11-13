@@ -46,14 +46,17 @@ Here are all the calls you can make using this API:
     --------- | -----------
     id | Int: a specific number for item id    
     
-      **REQUEST URL:**
+
+    >**REQUEST URL:**
 
       Example of a sample URl request:
       "http://35.209.74.28:8080/api/items/3001"
 
 
     > **RESPONSE:**  JSON Object
-
+    
+    Example of sucess response:
+    `````````
     {
         "status": "Success",
         "data": {
@@ -64,6 +67,7 @@ Here are all the calls you can make using this API:
             "item_supplier_id": "50004"
         }
     }
+    `````````
 
 ### POST
 
