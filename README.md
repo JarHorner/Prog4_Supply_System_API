@@ -25,26 +25,103 @@ if not, make sure to check if the database is running or the .env file has the p
 
 Here are all the calls you can make using this API:
 
-<br> `GET     /` <br><br>
+### GET
 
-Confirms a connection is made with the API.
+- ` / `\
+    Gets default API call: Displays status of API
+    > **RESPONSE:**  API status response
 
-<br><br> `GET      /api/items` <br><br>
+<br />
 
-Retrieves all the items in the database.
+- ` /api/items`\
+    Gets items currently present in database
+    > **RESPONSE:**  JSON Object
 
-<br><br> `GET      /api/items/:id` <br><br>
+<br />
 
-Retrieves a certain item from the database by its id.
+- ` /api/items/:id` \
+    Gets items currently present in database by item ID number
+    > **RESPONSE:**  JSON Object
 
-<br><br> `POST      /api/items` <br><br>
 
-Creates an item from the database by posting a JSON body containing the name, stockQuantity, price and supplierId.
+### POST
 
-<br><br> `PATCH      /api/items/:id` <br><br>
+- ` /api/items`\
+    Add a new item to the database
+    
 
-Retrieves a certain item from the database by its id, and changes the stockQuantity by the amount in the given JSON body.
+    ATTRIBUTE | DESCRIPTION
+    --------- | -----------
+    name | String: a line of text for the item name 
+    stockQuantity | INT: a number describing the stock count of the item 
+    price | DOUBLE: a number describing the price of the item 
+    supplierId | INT: a number for the Id of the supplier
 
-<br><br> `DELETE      /api/items/:id` <br><br>
+    > **REQUEST BODY:** JSON Object with required attributes:
 
-Removes an item from the database by its id.
+    Example of a sample JSON body request:
+    ``````
+    {
+        "name" : "test",
+        "stockQuantity" : 8,
+        "price" : 9.80,
+        "supplierId" : 5010
+    }
+    ``````
+    > **RESPONSE:**  JSON Object
+
+    Example of sucess response:
+    `````````
+    {
+        "status": "Success",
+        "data": {
+            "_name": "test",
+            "_stockQuantity": "8",
+            "_price": "9.8",
+            "_supplierId": "5010"
+        }
+    }
+    `````````
+
+<br />
+
+### PATCH
+
+- ` /api/items/:id`\
+    Change an attribute of an item using it's Id in the database, like stockQuantity for example
+    
+
+    ATTRIBUTE | DESCRIPTION
+    --------- | -----------
+    Name Of Attribute | New value for that attribute
+    
+
+    > **REQUEST BODY:** JSON Object with new attributes:
+     
+    Example of a sample JSON body request:
+    ``````
+    {
+        "stockQuantity" : 10
+    }
+    ``````
+    > **RESPONSE:**  JSON Object
+
+    Example of sucess response:
+    `````````
+    {
+        "status": "Success",
+        "data": {
+            "_stockQuantity": "10",
+        }
+    }
+    `````````
+
+<br />
+
+### DELETE
+
+- ` /api/items/:id` \
+    Deletes the item from the database using the item id
+    > **RESPONSE:**  JSON Object
+
+
