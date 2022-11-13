@@ -27,15 +27,17 @@ Here are all the calls you can make using this API:
 
 # GET
 
-` / `\
->Gets default API call: Displays status of API
-> **RESPONSE:**  API staus response
+- ` / `\
+    Gets default API call: Displays status of API
+    > **RESPONSE:**  API staus response
 
 <br />
 
-` /api/items`\
-Gets items currently present in database
-> **RESPONSE:**  JSON Object
+- ` /api/items`\
+    Gets items currently present in database
+    > **RESPONSE:**  JSON Object
+
+<br />
 
 - ` /api/items/:id` \
     Gets items currently present in database by item ID number
