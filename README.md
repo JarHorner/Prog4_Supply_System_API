@@ -57,7 +57,7 @@ Here are all the calls you can make using this API:
     price | DOUBLE: a number describing the price of the item 
     supplierId | INT: a number for the Id of the supplier 
     
-
+    Example of a sample JSON body request:
     ``````
     {
         "name" : "test",
@@ -67,6 +67,19 @@ Here are all the calls you can make using this API:
     }
     ``````
     > **RESPONSE:**  JSON Object
+    
+    Example of sucess response:
+    `````````
+    {
+        "status": "Success",
+        "data": {
+            "_name": "test",
+            "_stockQuantity": "8",
+            "_price": "9.8",
+            "_supplierId": "5010"
+        }
+    }
+    `````````
 
 <br />
 
