@@ -30,7 +30,7 @@ Here are all the calls you can make using this API:
 ` / `\
 Gets default API call: Displays status of API
 > **RESPONSE:**  API staus response
-<br><br>
+__
 
 ` /api/items`\
 Gets items currently present in database
@@ -39,7 +39,7 @@ Gets items currently present in database
 - ` /api/items/:id` \
     Gets items currently present in database by item ID number
     > **RESPONSE:**  JSON Object
-<br><br>
+
 
 # POST
 
