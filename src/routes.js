@@ -20,9 +20,9 @@ module.exports.register = (app, database) => {
   app.get("/api/items", async (req, res) => {
     let query;
     try {
-      query = database.query("SELECT * FROM Items");
+      query = database.query("SELECT * FROM items");
 
-      console.log(query);
+      // console.log(query);
       const items = await query;
 
       res.status(200).send(JSON.stringify(items)).end();
@@ -41,12 +41,62 @@ module.exports.register = (app, database) => {
 
   //retrieves a specific item with an id
   app.get("/api/items/:id", async (req, res) => {
-    res
-      .status(200)
-      .send(
-        "The API will retrieve an item from the database by either name or id!"
-      )
-      .end();
+    
+    let query = ""; 
+    let _id = req.params.id; 
+    let items; 
+    let _status = 500;
+
+    if(isNaN(_id)){
+      res.status(400)
+      .send({
+       tried: "The API will retrieve an item from the database by id!",
+       status: "FAILED",
+       error: "You may have not entered in a number",
+       messsage: "Could not process request. Please check if the information provided is correct"
+      })
+    }else{
+
+    try {
+
+        query = database.query("SELECT * FROM items WHERE item_id =?", [_id]);
+         items = await query;
+        
+        if(items.length != 0) {
+          res.status(200).send(JSON.stringify(items)).end()
+        }else{
+           _status = 400; 
+           throw error  
+        }
+      
+        
+    } catch (error) {
+      if(_status === 400){
+        res
+        .status(_status)
+        .send({
+            tried: 'The API will retrieve an item from the database by either name or id!', 
+            status: "FAILED", 
+            error: error?.message || error,
+            message: 'The id entered in is either mis-formatted or incorrect' ,
+            detail: 'Ensure you are including a correct Id that exists'
+          });
+      }else if(_status === 500){
+        res
+      .status(_status)
+      .send({
+          tried: 'The API will retrieve an item from the database by either name or id!', 
+          status: `FAILED`, 
+          error: error?.message || error,
+          message: 'Not properly connected to the API' ,
+          detail: 'Ensure you are correctly connected to the API'
+        });
+      }
+    }
+  
+  }
+      
+      
   });
 
   //Adds a new item to the Item table in the database

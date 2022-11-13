@@ -5,11 +5,10 @@ app.use(express.json());
 
 app.use((req, res, next) => {
     res.set('Content-Type', 'application/json');
+
     next();  
 });
 
-res = database.query("SELECT * FROM items WHERE ID = 3000")
-console.log(res);
 
 const startServer = async _ => {
     const database = require("./src/database");
