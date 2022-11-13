@@ -28,8 +28,8 @@ Here are all the calls you can make using this API:
 # GET
 
 ` / `\
-Gets default API call: Displays status of API
-    > **RESPONSE:**  API staus response
+>Gets default API call: Displays status of API
+> **RESPONSE:**  API staus response
 
 <br />
 
