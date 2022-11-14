@@ -44,8 +44,47 @@ Here are all the calls you can make using this API:
 <br />
 
 - ` /api/items/:id` \
-    Gets items currently present in database by item ID number
+    Gets items currently present in database by item ID or Name
+
+    ATTRIBUTE | DESCRIPTION
+    --------- | -----------
+    id | Int: a specific number for item id will be returned    
+    name| String: a specific name for item will be returned 
+
+    >**REQUEST URL:**
+
+      Example of a sample URl request:
+      "http://35.209.74.28:8080/api/items/3001"
+      "http://35.209.74.28:8080/api/items/Bing Bobs"
+
+
     > **RESPONSE:**  JSON Object
+    
+    Example of sucess response:
+    `````````
+    {
+        "status": "Success",
+        "data": {
+            "item_id": 3001,
+            "item_name": "Widgets",
+            "item_quantity": 10,
+            "item_price": 35.5,
+            "item_supplier_id": "50004"
+        }
+    }
+    `````````
+     `````````
+    {
+        "status": "Success",
+        "data": {
+           "item_id": 3007,
+          "item_name": "Bing Bobs",
+          "item_quantity": 25,
+          "item_price": 2.39,
+          "item_supplier_id": "50005"
+        }
+    }
+    `````````
 
 
 ### POST
@@ -89,55 +128,7 @@ Here are all the calls you can make using this API:
 
 <br />
 
-### PATCH
-
-- ` /api/items/:id`\
-    Change an attribute of an item using it's Id in the database, like stockQuantity for example
     
-
-    ATTRIBUTE | DESCRIPTION
-    --------- | -----------
-    Name Of Attribute | New value for that attribute
-    
-
-    > **REQUEST BODY:** JSON Object with new attributes:
-     
-    Example of a sample JSON body request:
-    ``````
-    {
-        "stockQuantity" : 10
-    }
-    ``````
-    > **RESPONSE:**  JSON Object
-
-    Gets items currently present in database by item ID number
-
-    ATTRIBUTE | DESCRIPTION
-    --------- | -----------
-    id | Int: a specific number for item id    
-    
-
-    >**REQUEST URL:**
-
-      Example of a sample URl request:
-      "http://35.209.74.28:8080/api/items/3001"
-
-
-    > **RESPONSE:**  JSON Object
-    
-    Example of sucess response:
-    `````````
-    {
-        "status": "Success",
-        "data": {
-            "item_id": 3001,
-            "item_name": "Widgets",
-            "item_quantity": 10,
-            "item_price": 35.5,
-            "item_supplier_id": "50004"
-        }
-    }
-    `````````
 <br />
 
 ### DELETE
@@ -148,7 +139,7 @@ Here are all the calls you can make using this API:
     --------- | -----------
     item_id   | Item ID of an existing item
     
-
+     Example of sucess response:
     > **REQUEST BODY:** JSON Object with new attributes:
      
     Example of a sample JSON body request:
@@ -158,14 +149,12 @@ Here are all the calls you can make using this API:
     }
     ``````
     > **RESPONSE:**  JSON Object
+    
 
     Example of success response:
     `````````
     {
-        "status": "Success",
-        "data": {
-            "message": The API will delete an item in the database by the id!
-        }
+        "success": True
     }
     `````````
 

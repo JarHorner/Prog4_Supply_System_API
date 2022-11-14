@@ -36,27 +36,21 @@ module.exports.register = (app, database) => {
     }
   });
 
-  //retrieves a specific item with an id
-  app.get("/api/items/:id", async (req, res) => {
+  //retrieves a specific item with an id or add
+  app.get("/api/items/:identifier" , async (req, res) => {
     
     let query = ""; 
-    let _id = req.params.id; 
+    let _identifier = req.params.identifier;
     let items; 
     let _status = 500;
 
-    if(isNaN(_id)){
-      res.status(400)
-      .send({
-       tried: "The API will retrieve an item from the database by id!",
-       status: "FAILED",
-       error: "You may have not entered in a number",
-       messsage: "Could not process request. Please check if the information provided is correct"
-      })
+    if(isNaN(_identifier)){
+      query = database.query("SELECT * FROM items WHERE item_name =?", [_identifier]);
     }else{
+      query = database.query("SELECT * FROM items WHERE item_id =?", [_identifier]);
+    }
 
     try {
-
-        query = database.query("SELECT * FROM items WHERE item_id =?", [_id]);
          items = await query;
         
         if(items.length != 0) {
@@ -75,8 +69,8 @@ module.exports.register = (app, database) => {
             tried: 'The API will retrieve an item from the database by either name or id!', 
             status: "FAILED", 
             error: error?.message || error,
-            message: 'The id entered in is either mis-formatted or incorrect' ,
-            detail: 'Ensure you are including a correct Id that exists'
+            message: 'The id or name entered in is either mis-formatted or incorrect' ,
+            detail: 'Ensure you are including a correct id or name that exists'
           });
       }else if(_status === 500){
         res
@@ -94,7 +88,7 @@ module.exports.register = (app, database) => {
   }
       
       
-  });
+  );
 
   //Adds a new item to the Item table in the database
   app.post("/api/items", async (req, res) => {
