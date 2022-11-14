@@ -87,7 +87,7 @@ Here are all the calls you can make using this API:
 
 <br />
 
-- ` /api/items/:id` \
+- ` /api/items/:identifier` \
     Gets items currently present in database by item ID or Name
 
     ATTRIBUTE | DESCRIPTION
