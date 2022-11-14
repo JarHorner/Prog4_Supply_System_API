@@ -202,49 +202,6 @@ Here are all the calls you can make using this API:
     }
     `````````
 
-### POST
-
-- ` /api/items`\
-   Add a new item to the database
-
-  | ATTRIBUTE     | DESCRIPTION                                          |
-  | ------------- | ---------------------------------------------------- |
-  | name          | String: a line of text for the item name             |
-  | stockQuantity | INT: a number describing the stock count of the item |
-  | price         | DOUBLE: a number describing the price of the item    |
-  | supplierId    | INT: a number for the Id of the supplier             |
-
-  > **REQUEST BODY:** JSON Object with required attributes:
-
-  Example of a sample JSON body request:
-
-  ```
-  {
-      "name" : "test",
-      "stockQuantity" : 8,
-      "price" : 9.80,
-      "supplierId" : 5010
-  }
-  ```
-
-  > **RESPONSE:** JSON Object
-
-  Example of sucess response:
-
-  ```
-  {
-      "status": "Success",
-      "data": {
-          "_name": "test",
-          "_stockQuantity": "8",
-          "_price": "9.8",
-          "_supplierId": "5010"
-      }
-  }
-  ```
-
-<br />
-
 ### PATCH
 
 - ` /api/items/:id`\
