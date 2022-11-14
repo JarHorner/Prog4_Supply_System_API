@@ -29,6 +29,7 @@ Here are all the calls you can make using this API:
 
 ### GET
 
+
 - `/`\
    Gets default API call: Displays status of API
   > **RESPONSE:** API status response
@@ -36,13 +37,13 @@ Here are all the calls you can make using this API:
 <br />
 
 - ` /api/items`\
+
    Gets items currently present in database
   > **RESPONSE:** JSON Object
 
 <br />
 
 - ` /api/items/:id` \
-
     Gets items currently present in database by item ID or Name
 
     ATTRIBUTE | DESCRIPTION
@@ -72,9 +73,7 @@ Here are all the calls you can make using this API:
         }
     }
     `````````
-
-     Example of sucess response:
-    `````````
+     `````````
     {
         "status": "Success",
         "data": {
@@ -87,6 +86,77 @@ Here are all the calls you can make using this API:
     }
     `````````
 
+
+### POST
+
+- ` /api/items`\
+    Add a new item to the database
+    
+
+    ATTRIBUTE | DESCRIPTION
+    --------- | -----------
+    name | String: a line of text for the item name 
+    stockQuantity | INT: a number describing the stock count of the item 
+    price | DOUBLE: a number describing the price of the item 
+    supplierId | INT: a number for the Id of the supplier
+
+    > **REQUEST BODY:** JSON Object with required attributes:
+
+    Example of a sample JSON body request:
+    ``````
+    {
+        "name" : "test",
+        "stockQuantity" : 8,
+        "price" : 9.80,
+        "supplierId" : 5010
+    }
+    ``````
+    > **RESPONSE:**  JSON Object
+
+    Example of sucess response:
+    `````````
+    {
+        "status": "Success",
+        "data": {
+            "_name": "test",
+            "_stockQuantity": "8",
+            "_price": "9.8",
+            "_supplierId": "5010"
+        }
+    }
+    `````````
+
+<br />
+
+    
+<br />
+
+### DELETE
+
+- ` /api/items/delete/:id` \
+    Deletes the item from the database using the item id
+    ATTRIBUTE | DESCRIPTION
+    --------- | -----------
+    item_id   | Item ID of an existing item
+    
+     Example of sucess response:
+    > **REQUEST BODY:** JSON Object with new attributes:
+     
+    Example of a sample JSON body request:
+    ``````
+    {
+        "item_id" : 3040
+    }
+    ``````
+    > **RESPONSE:**  JSON Object
+    
+
+    Example of success response:
+    `````````
+    {
+        "success": True
+    }
+    `````````
 
 ### POST
 
@@ -161,9 +231,3 @@ Here are all the calls you can make using this API:
   ```
 
 <br />
-
-### DELETE
-
-- ` /api/items/:id` \
-   Deletes the item from the database using the item id
-  > **RESPONSE:** JSON Object
