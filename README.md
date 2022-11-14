@@ -31,13 +31,57 @@ Here are all the calls you can make using this API:
 
 - `/`\
    Gets default API call: Displays status of API
+   
+      Example of a sample URl request:
+      "http://35.209.74.28:8080"
+      
+      
   > **RESPONSE:** API status response
+    
+    Example of sucess response:
+    `````````
+    The API is connected properly!
 
 <br />
 
 - ` /api/items`\
    Gets items currently present in database
+
+  >**REQUEST URL:**
+
+      Example of a sample URl request:
+      "http://35.209.74.28:8080/api/items/3001"
+      
+      
   > **RESPONSE:** JSON Object
+    
+    Example of sucess response:
+    `````````
+    {
+        "status": "Success",
+        "data": {
+            "item_id": 3001,
+            "item_name": "Widgets",
+            "item_quantity": 10,
+            "item_price": 35.5,
+            "item_supplier_id": "50004"
+        },
+        {
+            "item_id": 3002,
+            "item_name": "Grommets",
+            "item_quantity": 20,
+            "item_price": 23.45,
+            "item_supplier_id": "50001"
+        },
+        {
+            "item_id": 3003,
+            "item_name": "Wedges",
+            "item_quantity": 15,
+            "item_price": 10.15,
+            "item_supplier_id": "50020"
+        }........
+    }
+    `````````
 
 <br />
 
