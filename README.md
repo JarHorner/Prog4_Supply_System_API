@@ -52,7 +52,7 @@ Here are all the calls you can make using this API:
   >**REQUEST URL:**
 
       Example of a sample URl request:
-      "http://35.209.74.28:8080/api/items/3001"
+      "http://35.209.74.28:8080/api/items"
       
       
   > **RESPONSE:** JSON Object
