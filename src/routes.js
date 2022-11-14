@@ -1,18 +1,18 @@
+const { query } = require("express");
+
 module.exports.register = (app, database) => {
   //base call, shows the api works
   app.get("/", async (req, res) => {
     try {
       res.status(200).send("The API is connected properly! ").end();
     } catch (error) {
-      res
-        .status(error?.status)
-        .send({ 
-          tried: 'Base call', 
-          status: `FAILED`, 
-          error: error?.message || error,
-          message: 'Not properly connected to the API' ,
-          detail: 'Ensure you are correctly connected to the API'
-        });
+      res.status(error?.status).send({
+        tried: "Base call",
+        status: `FAILED`,
+        error: error?.message || error,
+        message: "Not properly connected to the API",
+        detail: "Ensure you are correctly connected to the API",
+      });
     }
   });
 
@@ -22,31 +22,78 @@ module.exports.register = (app, database) => {
     try {
       query = database.query("SELECT * FROM items");
 
-      console.log(query);
+      // console.log(query);
       const items = await query;
-
       res.status(200).send(JSON.stringify(items)).end();
     } catch (error) {
-      res
-        .status(error?.status)
-        .send({ 
-          tried: 'Retrieving all items', 
-          status: `FAILED`, 
-          error: error?.message || error,
-          message: 'Not properly connected to the API' ,
-          detail: 'Ensure you are correctly connected to the API'
-        });
+      res.status(error?.status).send({
+        tried: "Retrieving all items",
+        status: `FAILED`,
+        error: error?.message || error,
+        message: "Not properly connected to the API",
+        detail: "Ensure you are correctly connected to the API",
+      });
     }
   });
 
   //retrieves a specific item with an id
   app.get("/api/items/:id", async (req, res) => {
-    res
-      .status(200)
-      .send(
-        "The API will retrieve an item from the database by either name or id!"
-      )
-      .end();
+    
+    let query = ""; 
+    let _id = req.params.id; 
+    let items; 
+    let _status = 500;
+
+    if(isNaN(_id)){
+      res.status(400)
+      .send({
+       tried: "The API will retrieve an item from the database by id!",
+       status: "FAILED",
+       error: "You may have not entered in a number",
+       messsage: "Could not process request. Please check if the information provided is correct"
+      })
+    }else{
+
+    try {
+
+        query = database.query("SELECT * FROM items WHERE item_id =?", [_id]);
+         items = await query;
+        
+        if(items.length != 0) {
+          res.status(200).send(JSON.stringify(items)).end()
+        }else{
+           _status = 400; 
+           throw error  
+        }
+      
+        
+    } catch (error) {
+      if(_status === 400){
+        res
+        .status(_status)
+        .send({
+            tried: 'The API will retrieve an item from the database by either name or id!', 
+            status: "FAILED", 
+            error: error?.message || error,
+            message: 'The id entered in is either mis-formatted or incorrect' ,
+            detail: 'Ensure you are including a correct Id that exists'
+          });
+      }else if(_status === 500){
+        res
+      .status(_status)
+      .send({
+          tried: 'The API will retrieve an item from the database by either name or id!', 
+          status: `FAILED`, 
+          error: error?.message || error,
+          message: 'Not properly connected to the API' ,
+          detail: 'Ensure you are correctly connected to the API'
+        });
+      }
+    }
+  
+  }
+      
+      
   });
 
   //Adds a new item to the Item table in the database
@@ -73,53 +120,84 @@ module.exports.register = (app, database) => {
         _status = "Success";
       } catch (error) {
         if (error?.status === 400) {
-          res
-          .status(error?.status)
-          .send({ 
-            tried: 'Adding a new item', 
-            status: `FAILED`, 
+          res.status(error?.status).send({
+            tried: "Adding a new item",
+            status: `FAILED`,
             error: error?.message || error,
-            message: 'Information in the body is either mis-formatted or incorrect' ,
-            detail: 'Ensure you are including the correct information in the body, and in the right order'
+            message:
+              "Information in the body is either mis-formatted or incorrect",
+            detail:
+              "Ensure you are including the correct information in the body, and in the right order",
           });
         } else if (error?.status === 500) {
-          res
-          .status(error?.status)
-          .send({ 
-            tried: 'Adding a new item', 
-            status: `FAILED`, 
+          res.status(error?.status).send({
+            tried: "Adding a new item",
+            status: `FAILED`,
             error: error?.message || error,
-            message: 'Not properly connected to the API' ,
-            detail: 'Ensure you are correctly connected to the API'
+            message: "Not properly connected to the API",
+            detail: "Ensure you are correctly connected to the API",
           });
         }
       }
 
       let messsage =
-      '{"status":"' +
-      _status +
-      '", "data":{"_name":"' +
-      _name +
-      '","_stockQuantity":"' +
-      _stockQuantity +
-      '","_price":"' +
-      _price +
-      '", "_supplierId":"' +
-      _supplierId +
-      '"}}';
-    const obj_messsage = JSON.parse(messsage);
-    res.status(200).send(obj_messsage).end();
+        '{"status":"' +
+        _status +
+        '", "data":{"_name":"' +
+        _name +
+        '","_stockQuantity":"' +
+        _stockQuantity +
+        '","_price":"' +
+        _price +
+        '", "_supplierId":"' +
+        _supplierId +
+        '"}}';
+      const obj_messsage = JSON.parse(messsage);
+      res.status(200).send(obj_messsage).end();
     }
   });
 
   // will be able to change the quantity in the database
   app.patch("/api/items/:id", async (req, res) => {
-    res
-      .status(200)
-      .send(
-        "The API will change the quantity of an item in the database by the id!"
-      )
-      .end();
+    let success = false;
+    let itemID = req.params.id;
+    let newQuantity = req.body.quantity;
+    if (isNaN(itemID) || isNaN(newQuantity)) {
+      res.status(400).send({
+        tried: "Updating Item Quantity",
+        success: success,
+        messsage:
+          "Could not process request. Please check if the information provided is correct",
+      });
+    } else {
+        database.query(
+          "UPDATE items SET item_quantity = ? WHERE item_id = ?",
+          [newQuantity, itemID],
+          (errors, results, fields) => {
+            if (errors != undefined) {
+              res.status(500).send({
+                tried: "Updating Item Quantity",
+                success: success,
+                error: errors.message,
+                messsage:
+                  "Unable to connect to API. Please ensure the server is running",
+              }).end();
+            }
+            console.log(results);
+            if (results.affectedRows == 0) {
+              res.status(404).send({
+                tried: "Updating Item Quantity",
+                success: success,
+                error: errors,
+                messsage: "Item not found. Please add the Item first",
+              }).end();
+            }
+            else {
+              res.status(200).send({ success: !success }).end();
+            }
+          }
+        );
+      }
   });
 
   // will be able to delete an item in the database
