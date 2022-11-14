@@ -82,7 +82,7 @@ module.exports.register = (app, database) => {
           "Could not process request. Please check if the information provided is correct",
       });
     }
-
+	});
   //retrieves a specific item with an id or add
   app.get("/api/items/:identifier" , async (req, res) => {
     
@@ -143,20 +143,22 @@ module.exports.register = (app, database) => {
     let _stockQuantity = req.body.stockQuantity;
     let _price = req.body.price;
     let _supplierId = req.body.supplierId;
+    let _id = req.body.id;
     let _status = "";
 
     if (
       typeof _name === "undefined" ||
       typeof _stockQuantity === "undefined" ||
       typeof _price === "undefined" ||
-      typeof _supplierId === "undefined"
+      typeof _supplierId === "undefined" ||
+      typeof _id === "undefined"
     ) {
       _status = "Unsuccess";
     } else {
       try {
         database.query(
-          "insert into Items(name, stockQuantity, price, supplierId) values (?, ?, ?, ?)",
-          [_name, _stockQuantity, _price, _supplierId]
+          "insert into items(item_id, item_name, item_quantity,item_price, item_supplier_id) values (?, ?, ?, ?, ?)",
+          [_id, _name, _stockQuantity, _price, _supplierId]
         );
         _status = "Success";
       } catch (error) {
@@ -240,5 +242,4 @@ module.exports.register = (app, database) => {
         );
       }
   });
-  });
-};
+  };
