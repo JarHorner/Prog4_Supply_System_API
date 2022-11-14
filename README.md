@@ -139,6 +139,7 @@ Here are all the calls you can make using this API:
 
     ATTRIBUTE | DESCRIPTION
     --------- | -----------
+    id | Int: a specific number for item id 
     name | String: a line of text for the item name 
     stockQuantity | INT: a number describing the stock count of the item 
     price | DOUBLE: a number describing the price of the item 
