@@ -120,8 +120,30 @@ Here are all the calls you can make using this API:
 
 ### DELETE
 
-- ` /api/items/:id` \
+- ` /api/items/delete/:id` \
     Deletes the item from the database using the item id
+    ATTRIBUTE | DESCRIPTION
+    --------- | -----------
+    item_id   | Item ID of an existing item
+    
+
+    > **REQUEST BODY:** JSON Object with new attributes:
+     
+    Example of a sample JSON body request:
+    ``````
+    {
+        "item_id" : 3040
+    }
+    ``````
     > **RESPONSE:**  JSON Object
 
+    Example of success response:
+    `````````
+    {
+        "status": "Success",
+        "data": {
+            "message": The API will delete an item in the database by the id!
+        }
+    }
+    `````````
 
