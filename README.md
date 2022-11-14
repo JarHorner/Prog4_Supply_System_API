@@ -45,7 +45,7 @@ Here are all the calls you can make using this API:
 
 <br />
 
-- ` /api/items`\
+- ` /api/items`
 
    Gets items currently present in database
 
