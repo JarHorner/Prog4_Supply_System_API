@@ -43,17 +43,18 @@ Here are all the calls you can make using this API:
 
 - ` /api/items/:id` \
 
-    Gets items currently present in database by item ID number
+    Gets items currently present in database by item ID or Name
 
     ATTRIBUTE | DESCRIPTION
     --------- | -----------
-    id | Int: a specific number for item id    
-    
+    id | Int: a specific number for item id will be returned    
+    name| String: a specific name for item will be returned 
 
     >**REQUEST URL:**
 
       Example of a sample URl request:
       "http://35.209.74.28:8080/api/items/3001"
+      "http://35.209.74.28:8080/api/items/Bing Bobs"
 
 
     > **RESPONSE:**  JSON Object
@@ -68,6 +69,20 @@ Here are all the calls you can make using this API:
             "item_quantity": 10,
             "item_price": 35.5,
             "item_supplier_id": "50004"
+        }
+    }
+    `````````
+
+     Example of sucess response:
+    `````````
+    {
+        "status": "Success",
+        "data": {
+           "item_id": 3007,
+          "item_name": "Bing Bobs",
+          "item_quantity": 25,
+          "item_price": 2.39,
+          "item_supplier_id": "50005"
         }
     }
     `````````
