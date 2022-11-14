@@ -149,7 +149,8 @@ Here are all the calls you can make using this API:
 
     Example of a sample JSON body request:
     ``````
-    {
+    { 
+        "id" : 69  
         "name" : "test",
         "stockQuantity" : 8,
         "price" : 9.80,
@@ -163,6 +164,7 @@ Here are all the calls you can make using this API:
     {
         "status": "Success",
         "data": {
+            "_id" : 69  
             "_name": "test",
             "_stockQuantity": "8",
             "_price": "9.8",
