@@ -58,16 +58,18 @@ module.exports.register = (app, database) => {
     let success = false;
 
     if(!isNaN(itemID)) {
-      
+
       database.query(`DELETE FROM items WHERE item_id = ?`, [itemID], (errors, results, fields) => {
-      
-        if(errors.code == 'ETIMEDOUT') {
-          res.status(500).send({
-            tried: "Deleting Item",
-            success: success,
-            message: "Unable to connect to API. Please make sure server is running."
-          }).end();
-          return;
+
+        if(errors != null){
+          if(errors.code == 'ETIMEDOUT') {
+            res.status(500).send({
+              tried: "Deleting Item",
+              success: success,
+              message: "Unable to connect to API. Please make sure server is running."
+            }).end();
+            return;
+          }
         }
 
         if(results.affectedRows == 0) {
