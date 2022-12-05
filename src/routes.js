@@ -17,7 +17,24 @@ module.exports.register = (app, database) => {
     }
   });
 
-
+  app.get("/api/items/count", async (req,res) => {
+     let query;
+     try {
+	query = database.query("SELECT COUNT(item_id) AS numItems FROM items");
+	const count = await query;
+	res.status(200).send(count).end()
+    } catch (error) {
+	res
+        .status(error?.status)
+        .send({ 
+          tried: 'Retrieving all items', 
+          status: `FAILED`, 
+          error: error?.message || error,
+          message: 'Not properly connected to the API' ,
+          detail: 'Ensure you are correctly connected to the API'
+        });
+   }
+ });
 
   //retrieves all the items in the database.
   app.get("/api/items", async (req, res) => {
