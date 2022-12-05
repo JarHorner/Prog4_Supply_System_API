@@ -48,7 +48,7 @@ module.exports.register = (app, database) => {
       res.status(200).send(JSON.stringify(items)).end();
     } catch (error) {
       res
-        .status(error?.status)
+        .status(404)
         .send({ 
           tried: 'Retrieving all items', 
           status: `FAILED`, 
@@ -175,13 +175,16 @@ module.exports.register = (app, database) => {
 
       try {
 const exists = await database.query("select * from items where item_id = (?)",[_id]);
-console.log(exists)
-        database.query(
+if (exists.length > 0)  {
+	throw new Error('already exsits');
+}else {
+     database.query(
           "insert into items(item_id, item_name, item_quantity,item_price, item_supplier_id) values (?, ?, ?, ?, ?)",
           [_id, _name, _stockQuantity, _price, _supplierId]
         );
         _status = "Success";
-      } catch (error) {
+}      
+} catch (error) {
         if (error?.status === 400) {
           res.status(error?.status).send({
             tried: "Adding a new item",
